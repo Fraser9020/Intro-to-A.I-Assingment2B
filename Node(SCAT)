@@ -1,0 +1,27 @@
+from symtable import Class
+
+class Node:
+    
+    def __init__(self, location, scats_number, latitude, longitude, time, vehicle_count):
+            self.location = location
+            self.scats_number = scats_number
+           # self.date = date
+            self.latitude = latitude
+            self.longitude = longitude 
+            self.time = time 
+            self.vehicle_count = vehicle_count 
+
+    def get_time_slots(self):
+        return self.time
+    def get_vehicle_count(self):
+        return self.vehicle_count
+    def get_location(self): 
+        return self.location
+    def get_scats_number(self):
+        return self.scats_number
+    def get_latitude(self):
+        return self.latitude
+    def get_longitude(self):    
+        return self.longitude
+    
+
