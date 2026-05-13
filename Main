@@ -1,0 +1,40 @@
+
+import pandas as pd 
+import Parser as Parser
+from Node import Node
+
+
+def main():
+    print("Hello from assingment2b!")  
+    Statsdata = Parser.return_problem()   
+    print (Statsdata['Vehicle_Count'][0:1])  
+    nodes = {}
+    #Loop to interate through the data and create a node
+    for index in range(len(Statsdata['Location'])): 
+        location = Statsdata['Location'].iloc[index]
+        scats_number = Statsdata['Scats_Number'].iloc[index]
+        latitude = Statsdata['Latitude'].iloc[index]
+        longitude = Statsdata['Longitude'].iloc[index]
+        time = Statsdata['Time'][index] if index < len(Statsdata['Time']) else None
+        vehicle_count = Statsdata['Vehicle_Count'].iloc[index]
+        Row_Node = Node(location, scats_number, latitude, longitude, time, vehicle_count) 
+        nodes [scats_number] = Row_Node  
+    print(len(nodes))  
+   # print("Available keys:", list(nodes.keys())[:10])  # Print first 10 keys to see what's there
+    print ('Times', nodes[970].get_time_slots())
+    print ('Location:', nodes[970].get_location())
+    print ('Scats Number:', nodes[970].get_scats_number())
+    print ('Latitude:', nodes[970].get_latitude())
+    print ('Longitude:', nodes[970].get_longitude())
+    print ('Vehicle Count:', nodes[970].get_vehicle_count())
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
