@@ -1,1 +1,87 @@
 
+from ast import For
+import numpy as np
+import pandas as pd  
+import Node as Node
+from datetime import datetime 
+
+"""
+    Parses a route finding problem file and returns a structured dictionary.
+    Returns:
+        {
+            'Location ':
+            'Scats Number':
+            'Date': int,
+            'Latitude': int,
+            'Longitude': int,
+            'Time': int,
+            '"Vehicle_Count": int
+        }
+    """
+#creates a parser class to read the excel file and return the data in a structured format 
+#Passes in the filename as a object paramter and reads the data using pandas
+
+class Parser(object):
+    def __init__(self, filename):
+        self.filename = filename
+        self.data = pd.read_excel(filename)
+    def return_data(self): 
+        return self.data #returns the whole data 
+    def return_location(self):
+        # Get the second column
+        location_column = self.data.iloc[:, 1] 
+        return location_column 
+    def return_scats_number(self): 
+        # Get the first column
+        scats_number_column = self.data.iloc[:, 0]
+        return scats_number_column 
+    def return_date(self):
+        # Get the date column 
+        date_column = self.data.iloc[:, 9] 
+        return date_column  
+    def return_nb_latitdue(self):
+        # Get the latitude column 
+        latitude_column = self.data.iloc[:, 3]
+        return latitude_column 
+    def return_nb_longitude(self):
+        # Get the longitude column 
+        longitude_column = self.data.iloc[:, 4]
+        return longitude_column        
+    def get_time_slots(self):
+        # Get the time slots from the header of the time columns 
+        time_slots= []
+        time_slots = self.data.columns[10:106]  
+        return time_slots 
+    def get_vehicle_count(self): 
+        # Get the vehicle count for each node and time slot 
+        vehicle_count = self.data.iloc[:, 10:106] 
+        return vehicle_count 
+ 
+p = Parser(r'C:\Users\Frase\OneDrive\Desktop\Uni_Work\2026s_Sem1\Intro To A.I\Assingment2B\Scats_Data_October_2006.xls')
+#creates a dictionary of each of the varibles required 
+problem = {
+        'Location': {}, 
+        'Scats_Number': {}, 
+        'Date': {}, 
+        'Latitude': {},
+        'Longitude': {}, 
+        'Time': {},
+        "Vehicle_Count": {}
+        }   
+
+# Extract line by line and then put that in to the correspiing scat number. Have an array in an array/ 
+# For each of the time slots and then put the vehicle count in that array. 
+
+def return_problem():
+    problem['Location'] = p.return_location()
+    problem['Scats_Number'] = p.return_scats_number()
+    problem['Date'] = p.return_date()
+    problem['Latitude'] = p.return_nb_latitdue()    
+    problem['Longitude'] = p.return_nb_longitude()
+    problem['Time'] = p.get_time_slots()  
+    problem['Vehicle_Count'] = p.get_vehicle_count() 
+    return problem
+
+
+
+ 
